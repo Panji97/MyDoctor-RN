@@ -2,56 +2,65 @@ import {StyleSheet, View, Text, ScrollView} from 'react-native';
 import React from 'react';
 import {colors, fonts} from '../utils';
 import {ProfilePart, CardCategory, Gap, News} from '../components';
+import {UserPic} from '../assets';
 
-const Doctor = () => {
+const Doctor = ({navigation}) => {
   return (
-    <ScrollView style={styles.container}>
+    <View style={styles.container}>
       <View style={styles.containerWrapper}>
-        <Gap height={30} />
-        <ProfilePart name="Panji setyo kurniawan" desc="Fullstack developer" />
-        <Text style={styles.text}>Want to consult with who today?</Text>
-        <View style={styles.card}>
-          <ScrollView horizontal>
-            <CardCategory />
-            <CardCategory />
-            <CardCategory />
-            <CardCategory />
-            <CardCategory />
-            <CardCategory />
-            <CardCategory />
-          </ScrollView>
-        </View>
-        <Text style={styles.name}>Top Rated Doctors</Text>
-        <View>
+        <ScrollView>
           <ProfilePart
-            name="Alexa Rachel"
-            desc="Pediatrician"
-            type="tertiary"
+            pic={UserPic}
+            name="Panji setyo kurniawan"
+            desc="Fullstack developer"
+            onPress={() => navigation.navigate('UserProfile')}
           />
-          <Gap height={16} />
-          <ProfilePart
-            name="Alexa Rachel"
-            desc="Pediatrician"
-            type="tertiary"
-          />
-          <Gap height={16} />
-          <ProfilePart
-            name="Alexa Rachel"
-            desc="Pediatrician"
-            type="tertiary"
-          />
-        </View>
-        <Text style={styles.name}>Good News</Text>
-        <View>
-          <News />
-          <Gap height={16} />
-          <News />
-          <Gap height={16} />
-          <News />
-        </View>
-        <Gap height={100} />
+          <Text style={styles.text}>Want to consult with who today?</Text>
+          <View style={styles.card}>
+            <ScrollView horizontal>
+              <CardCategory onPress={() => navigation.navigate('ListDoctor')} />
+              <CardCategory />
+              <CardCategory />
+              <CardCategory />
+              <CardCategory />
+              <CardCategory />
+              <CardCategory />
+            </ScrollView>
+          </View>
+          <Text style={styles.name}>Top Rated Doctors</Text>
+          <View>
+            <ProfilePart
+              pic={UserPic}
+              name="Alexa Rachel"
+              desc="Pediatrician"
+              isTertiary
+              onPress={() => navigation.navigate('DoctorProfile')}
+            />
+            <ProfilePart
+              pic={UserPic}
+              name="Alexa Rachel"
+              desc="Pediatrician"
+              isTertiary
+            />
+            <ProfilePart
+              pic={UserPic}
+              name="Alexa Rachel"
+              desc="Pediatrician"
+              isTertiary
+            />
+          </View>
+          <Text style={styles.name}>Good News</Text>
+          <View>
+            <News />
+            <Gap height={16} />
+            <News />
+            <Gap height={16} />
+            <News />
+          </View>
+          <Gap height={100} />
+        </ScrollView>
       </View>
-    </ScrollView>
+    </View>
   );
 };
 

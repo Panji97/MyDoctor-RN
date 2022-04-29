@@ -3,22 +3,16 @@ import React from 'react';
 import {colors, fonts} from '../../utils';
 import {BtnAddPhoto, BtnRemovePhoto, UserPhotoNull} from '../../assets';
 
-const Photo = ({type, onPress}) => {
-  if (type === 'add') {
-    return <BtnAddPhoto />;
-  }
-  if (type === 'remove') {
-    return <BtnRemovePhoto />;
-  }
-
+const Photo = ({onPress, add, remove, title, desc}) => {
   return (
     <View style={styles.container} onPress={onPress}>
       <TouchableOpacity style={styles.frame}>
         <UserPhotoNull />
-        <BtnAddPhoto style={styles.icon} />
+        {add && <BtnAddPhoto style={styles.icon} />}
+        {remove && <BtnRemovePhoto style={styles.icon} />}
       </TouchableOpacity>
-      <Text style={styles.title}>Panji setyo kurniawan</Text>
-      <Text style={styles.desc}>Fullstack Developer</Text>
+      <Text style={styles.title}>{title}</Text>
+      <Text style={styles.desc}>{desc}</Text>
     </View>
   );
 };
@@ -38,6 +32,7 @@ const styles = StyleSheet.create({
     height: 130,
     justifyContent: 'center',
     alignItems: 'center',
+    marginBottom: 26,
   },
   icon: {
     position: 'absolute',
@@ -48,10 +43,12 @@ const styles = StyleSheet.create({
     color: colors.primary_font,
     fontFamily: fonts[600],
     fontSize: 26,
+    textTransform: 'capitalize',
   },
   desc: {
     color: colors.tertiary_font,
     fontFamily: fonts[400],
     fontSize: 20,
+    textTransform: 'capitalize',
   },
 });

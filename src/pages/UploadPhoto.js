@@ -6,11 +6,14 @@ import {colors} from '../utils';
 const UploadPhoto = ({navigation}) => {
   return (
     <View style={styles.container}>
-      <Header title="Upload Photo" />
+      <Header
+        title="Upload Photo"
+        onPress={() => navigation.navigate('SignUp')}
+      />
       <View style={styles.content}>
         <View>
           <Gap height={50} />
-          <Photo />
+          <Photo title="Panji setyo kurniawan" desc="Fullstack Developer" add />
         </View>
         <View>
           <Button title="Upload and Continue" />
@@ -20,6 +23,7 @@ const UploadPhoto = ({navigation}) => {
             type="tertiary"
             onPress={() => navigation.replace('MainApp')}
           />
+          <Gap height={25} />
         </View>
       </View>
     </View>
@@ -34,7 +38,6 @@ const styles = StyleSheet.create({
     backgroundColor: colors.primary_bg,
   },
   content: {
-    padding: 24,
     flex: 1,
     justifyContent: 'space-between',
   },

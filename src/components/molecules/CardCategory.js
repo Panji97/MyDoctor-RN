@@ -1,14 +1,14 @@
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, TouchableOpacity} from 'react-native';
 import React from 'react';
 import {colors, fonts} from '../../utils';
 import {CardIcon} from '../../assets';
 
-const CardCategory = () => {
+const CardCategory = ({onPress}) => {
   return (
-    <View style={styles.container}>
+    <TouchableOpacity style={styles.container} onPress={onPress}>
       <CardIcon />
       <Text style={styles.title}>general practitioners</Text>
-    </View>
+    </TouchableOpacity>
   );
 };
 

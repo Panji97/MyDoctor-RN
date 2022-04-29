@@ -1,34 +1,39 @@
-import {StyleSheet, Text, View, Image} from 'react-native';
+import {StyleSheet, Text, View, Image, TouchableOpacity} from 'react-native';
 import React from 'react';
 import {colors, fonts} from '../../utils';
-import {ChevronRight, UserPic} from '../../assets';
+import {ChevronRight} from '../../assets';
 import {Rating} from '../atoms';
 
-const ProfilePart = ({type, name, desc}) => {
+const ProfilePart = ({name, desc, pic, isSecondary, isTertiary, onPress}) => {
   return (
-    <View style={styles.container}>
+    <TouchableOpacity
+      style={styles.container(isSecondary, isTertiary)}
+      onPress={onPress}>
       <View style={styles.containerWrapper}>
-        <Image source={UserPic} style={styles.image} />
+        <Image source={pic} style={styles.image} />
         <View>
           <Text style={styles.name}>{name}</Text>
           <Text style={styles.title}>{desc}</Text>
         </View>
       </View>
-      {type === 'secondary' && <ChevronRight />}
-      {type === 'tertiary' && <Rating />}
-    </View>
+      {isSecondary && <ChevronRight />}
+      {isTertiary && <Rating />}
+    </TouchableOpacity>
   );
 };
 
 export default ProfilePart;
 
 const styles = StyleSheet.create({
-  container: {
+  container: (isSecondary, isTertiary) => ({
     paddingHorizontal: 16,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-  },
+    borderBottomWidth: isSecondary ? 1 : 0,
+    paddingBottom: isSecondary ? 16 : 0,
+    marginTop: isSecondary ? 16 : isTertiary ? 16 : 30,
+  }),
   containerWrapper: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -47,7 +52,8 @@ const styles = StyleSheet.create({
   title: {
     color: colors.primary_font,
     textTransform: 'capitalize',
-    fontFamily: fonts[400],
+    fontFamily: fonts[300],
     fontSize: 14,
+    maxWidth: 215,
   },
 });

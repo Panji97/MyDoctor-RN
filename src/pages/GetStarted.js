@@ -7,7 +7,7 @@ import {Button, Gap} from '../components';
 const GetStarted = ({navigation}) => {
   return (
     <ImageBackground source={Bg} resizeMode="cover" style={styles.image}>
-      <View>
+      <View style={styles.container}>
         <Logo />
         <Text style={styles.text}>
           Konsultasi dengan dokter jadi lebih mudah & fleksibel
@@ -24,6 +24,7 @@ const GetStarted = ({navigation}) => {
           type="secondary"
           onPress={() => navigation.navigate('SignIn')}
         />
+        <Gap height={20} />
       </View>
     </ImageBackground>
   );
@@ -34,13 +35,16 @@ export default GetStarted;
 const styles = StyleSheet.create({
   image: {
     flex: 1,
+  },
+  container: {
+    flex: 1,
     padding: 40,
-    justifyContent: 'space-between',
   },
   text: {
     color: colors.secondary_font,
     fontFamily: fonts[600],
     fontSize: 30,
     maxWidth: 280,
+    marginTop: 90,
   },
 });

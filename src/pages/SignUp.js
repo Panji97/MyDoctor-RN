@@ -6,21 +6,22 @@ import {colors} from '../utils';
 const SignUp = ({navigation}) => {
   return (
     <ScrollView style={styles.container}>
-      <Header title="Create an account" />
-      <View style={styles.content}>
-        <Input title="Fullname" />
-        <Gap height={24} />
-        <Input title="Profession" />
-        <Gap height={24} />
-        <Input title="Email Address" />
-        <Gap height={24} />
-        <Input title="Password" />
-        <Gap height={40} />
-        <Button
-          title="Continue"
-          onPress={() => navigation.replace('UploadPhoto')}
-        />
-      </View>
+      <Header
+        title="Create an account"
+        onPress={() => navigation.navigate('GetStarted')}
+      />
+      <Input title="Fullname" />
+      <Gap height={24} />
+      <Input title="Profession" />
+      <Gap height={24} />
+      <Input title="Email Address" />
+      <Gap height={24} />
+      <Input title="Password" />
+      <Gap height={40} />
+      <Button
+        title="Continue"
+        onPress={() => navigation.navigate('UploadPhoto')}
+      />
     </ScrollView>
   );
 };
@@ -31,8 +32,5 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: colors.primary_bg,
     flex: 1,
-  },
-  content: {
-    paddingHorizontal: 40,
   },
 });

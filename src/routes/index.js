@@ -12,6 +12,11 @@ import {
   Doctor,
   Message,
   Hospital,
+  ListDoctor,
+  UserProfile,
+  EditProfile,
+  DoctorProfile,
+  Chating,
 } from '../pages';
 
 const Stack = createNativeStackNavigator();
@@ -34,13 +39,18 @@ const Routes = () => {
     <NavigationContainer>
       <Stack.Navigator
         screenOptions={{headerShown: false}}
-        initialRouteName="MainApp">
+        initialRouteName="Splash">
         <Stack.Screen name="Splash" component={Splash} />
         <Stack.Screen name="GetStarted" component={GetStarted} />
         <Stack.Screen name="SignIn" component={SignIn} />
         <Stack.Screen name="SignUp" component={SignUp} />
         <Stack.Screen name="UploadPhoto" component={UploadPhoto} />
         <Stack.Screen name="MainApp" component={MainApp} />
+        <Stack.Screen name="ListDoctor" component={ListDoctor} />
+        <Stack.Screen name="UserProfile" component={UserProfile} />
+        <Stack.Screen name="EditProfile" component={EditProfile} />
+        <Stack.Screen name="DoctorProfile" component={DoctorProfile} />
+        <Stack.Screen name="Chating" component={Chating} />
       </Stack.Navigator>
     </NavigationContainer>
   );
