@@ -2,15 +2,18 @@ import {StyleSheet, Text, View, TextInput} from 'react-native';
 import React, {useState} from 'react';
 import {colors, fonts} from '../../utils';
 
-const Input = ({title, secureTextEntry, message}) => {
+const Input = ({title, secureTextEntry, message, value, onChangeText}) => {
   // ======> custom input message
 
   if (message) {
     return (
       <TextInput
         style={styles.inputMessage}
-        placeholder="Tulis pesan untuk"
+        placeholder="Your type"
         placeholderTextColor={colors.tertiary_font}
+        value={value}
+        onChangeText={onChangeText}
+        secureTextEntry={secureTextEntry}
       />
     );
   }
@@ -35,6 +38,8 @@ const Input = ({title, secureTextEntry, message}) => {
         onBlur={onBlur}
         style={styles.input(border)}
         secureTextEntry={secureTextEntry}
+        value={value}
+        onChangeText={onChangeText}
       />
     </View>
   );
