@@ -1,15 +1,28 @@
-import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
-import React from 'react';
+import {StyleSheet, Text, View, TouchableOpacity, Image} from 'react-native';
+import React, {useState} from 'react';
 import {colors, fonts} from '../../utils';
-import {BtnAddPhoto, BtnRemovePhoto, UserPhotoNull} from '../../assets';
+import {BtnAddPhoto, BtnRemovePhoto, PhotoNull} from '../../assets';
+import {launchImageLibrary} from 'react-native-image-picker';
 
-const Photo = ({onPress, add, remove, title, desc}) => {
+const Photo = ({title, desc}) => {
+  const [hasPhoto, setHashPhoto] = useState(false);
+  const [photo, setPhoto] = useState(PhotoNull);
+
+  const uploadPhoto = () => {
+    launchImageLibrary({}, res => {
+      if (!res.didCancel) {
+        const source = {uri: res.assets[0].uri};
+        setPhoto(source);
+        setHashPhoto(true);
+      }
+    });
+  };
   return (
-    <View style={styles.container} onPress={onPress}>
-      <TouchableOpacity style={styles.frame}>
-        <UserPhotoNull />
-        {add && <BtnAddPhoto style={styles.icon} />}
-        {remove && <BtnRemovePhoto style={styles.icon} />}
+    <View style={styles.container}>
+      <TouchableOpacity style={styles.frame} onPress={uploadPhoto}>
+        <Image source={photo} style={styles.image} />
+        {!hasPhoto && <BtnAddPhoto style={styles.icon} />}
+        {hasPhoto && <BtnRemovePhoto style={styles.icon} />}
       </TouchableOpacity>
       <Text style={styles.title}>{title}</Text>
       <Text style={styles.desc}>{desc}</Text>
@@ -21,7 +34,6 @@ export default Photo;
 
 const styles = StyleSheet.create({
   container: {
-    // backgroundColor: colors.primary_bg,
     alignItems: 'center',
   },
   frame: {
@@ -33,6 +45,11 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     marginBottom: 26,
+  },
+  image: {
+    width: 120,
+    height: 120,
+    borderRadius: 120 / 2,
   },
   icon: {
     position: 'absolute',

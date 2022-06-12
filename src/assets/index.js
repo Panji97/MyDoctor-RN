@@ -23,6 +23,7 @@ import Language from './Icon/language.png';
 import Logout from './Icon/logout.png';
 import Rated from './Icon/rated.png';
 import Send from './Icon/send.svg';
+import PhotoNull from './Image/PhotoNull.png';
 
 export {
   Logo,
@@ -50,4 +51,5 @@ export {
   Logout,
   Rated,
   Send,
+  PhotoNull,
 };

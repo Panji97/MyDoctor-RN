@@ -1,7 +1,7 @@
 import {StyleSheet, ScrollView} from 'react-native';
 import React from 'react';
 import {Button, Gap, Header, Input} from '../components';
-import {colors, useForm} from '../utils';
+import {colors, storeData, useForm} from '../utils';
 import auth from '@react-native-firebase/auth';
 import {showMessage} from 'react-native-flash-message';
 import firestore from '@react-native-firebase/firestore';
@@ -17,26 +17,32 @@ const SignUp = ({navigation}) => {
   const continuePressed = () => {
     auth()
       .createUserWithEmailAndPassword(form.email, form.password)
-      .then(() => {
+      .then(response => {
+        // console.log(response.user.uid);
         setForm('reset');
 
         const data = {
           fullname: form.fullname,
           profession: form.profession,
           email: form.email,
+          uid: response.user.uid,
         };
 
         firestore()
           .collection('Users')
-          .add(data)
+          .doc(response.user.uid)
+          .set(data)
           .then(() => {
             console.log('User added!');
           });
+
+        storeData('Users', data);
 
         showMessage({
           message: 'User account created & signed in!',
           type: 'success',
         });
+        navigation.replace('UploadPhoto', data);
       })
       .catch(error => {
         if (error.code === 'auth/email-already-in-use') {
@@ -67,7 +73,7 @@ const SignUp = ({navigation}) => {
         onPress={() => navigation.navigate('GetStarted')}
       />
       <Input
-        title="fullname"
+        title="Fullname"
         value={form.fullname}
         onChangeText={value => {
           setForm('fullname', value);
@@ -75,19 +81,19 @@ const SignUp = ({navigation}) => {
       />
       <Gap height={24} />
       <Input
-        title="profession"
+        title="Profession"
         value={form.profession}
         onChangeText={value => setForm('profession', value)}
       />
       <Gap height={24} />
       <Input
-        title="email Address"
+        title="Email Address"
         value={form.email}
         onChangeText={value => setForm('email', value)}
       />
       <Gap height={24} />
       <Input
-        title="password"
+        title="Password"
         value={form.password}
         onChangeText={value => setForm('password', value)}
         secureTextEntry

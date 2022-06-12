@@ -1,4 +1,4 @@
-import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
+import {StyleSheet, Text, TouchableOpacity} from 'react-native';
 import React from 'react';
 import {colors, fonts} from '../../utils';
 import {Send} from '../../assets';
@@ -11,12 +11,13 @@ const Button = ({type, title, onPress, message}) => {
       </TouchableOpacity>
     );
   }
+
   return (
-    <View>
+    <>
       <TouchableOpacity style={styles.container(type)} onPress={onPress}>
         <Text style={styles.title(type)}>{title}</Text>
       </TouchableOpacity>
-    </View>
+    </>
   );
 };
 

@@ -1,15 +1,27 @@
 import {StyleSheet, View} from 'react-native';
 import React from 'react';
-import {Gap, Header, Photo, ProfilePart} from '../components';
+import {Header, ProfilePart} from '../components';
 import {colors} from '../utils';
 import {Logout, Profile, Rated, Language} from '../assets';
+import auth from '@react-native-firebase/auth';
+import {showMessage} from 'react-native-flash-message';
 
 const UserProfile = ({navigation}) => {
+  const logoutPressed = () => {
+    auth()
+      .signOut()
+      .then(() => {
+        showMessage({
+          message: 'Logout succes!',
+          type: 'success',
+        });
+        navigation.replace('Splash');
+      });
+  };
+
   return (
     <View style={styles.container}>
       <Header title="Profile" onPress={() => navigation.navigate('MainApp')} />
-      <Photo title="Panji setyo kurniawan" desc="Fullstack developer" />
-      <Gap height={30} />
       <ProfilePart
         pic={Profile}
         name="Edit Profile"
@@ -30,8 +42,9 @@ const UserProfile = ({navigation}) => {
         isSecondary
       />
       <ProfilePart
+        onPress={logoutPressed}
         pic={Logout}
-        name="Help Center"
+        name="Log Out"
         desc="Read our guidelines"
         isSecondary
       />

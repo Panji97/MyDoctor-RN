@@ -1,18 +1,31 @@
 import {StyleSheet, View, Text, ScrollView} from 'react-native';
-import React from 'react';
-import {colors, fonts} from '../utils';
+import React, {useEffect, useState} from 'react';
+import {colors, fonts, getData} from '../utils';
 import {ProfilePart, CardCategory, Gap, News} from '../components';
 import {UserPic} from '../assets';
+import firestore from '@react-native-firebase/firestore';
 
 const Doctor = ({navigation}) => {
+  const [name, setName] = useState(null);
+  const [profesion, setProfesion] = useState(null);
+  const [photo, setPhoto] = useState(null);
+
+  useEffect(() => {
+    getData('Users').then(res => {
+      setName(res.fullname);
+      setProfesion(res.profession);
+      setPhoto({uri: res.image});
+    });
+  }, []);
+
   return (
     <View style={styles.container}>
       <View style={styles.containerWrapper}>
         <ScrollView>
           <ProfilePart
-            pic={UserPic}
-            name="Panji setyo kurniawan"
-            desc="Fullstack developer"
+            pic={photo}
+            name={name}
+            desc={profesion}
             onPress={() => navigation.navigate('UserProfile')}
           />
           <Text style={styles.text}>Want to consult with who today?</Text>

@@ -42,6 +42,7 @@ const styles = StyleSheet.create({
     marginRight: 12,
     height: 50,
     width: 50,
+    borderRadius: 50 / 2,
   },
   name: {
     color: colors.primary_font,
