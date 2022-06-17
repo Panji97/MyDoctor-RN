@@ -12,6 +12,7 @@ const Doctor = ({navigation}) => {
 
   useEffect(() => {
     getData('Users').then(res => {
+      // console.log(res);
       setName(res.fullname);
       setProfesion(res.profession);
       setPhoto({uri: res.image});

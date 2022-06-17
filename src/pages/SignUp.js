@@ -18,7 +18,6 @@ const SignUp = ({navigation}) => {
     auth()
       .createUserWithEmailAndPassword(form.email, form.password)
       .then(response => {
-        // console.log(response.user.uid);
         setForm('reset');
 
         const data = {
@@ -28,13 +27,7 @@ const SignUp = ({navigation}) => {
           uid: response.user.uid,
         };
 
-        firestore()
-          .collection('Users')
-          .doc(response.user.uid)
-          .set(data)
-          .then(() => {
-            console.log('User added!');
-          });
+        firestore().collection('Users').doc(response.user.uid).set(data);
 
         storeData('Users', data);
 
@@ -42,7 +35,7 @@ const SignUp = ({navigation}) => {
           message: 'User account created & signed in!',
           type: 'success',
         });
-        navigation.replace('UploadPhoto', data);
+        navigation.navigate('UploadPhoto', data);
       })
       .catch(error => {
         if (error.code === 'auth/email-already-in-use') {

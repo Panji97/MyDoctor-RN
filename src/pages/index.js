@@ -11,7 +11,6 @@ import UserProfile from './UserProfile';
 import EditProfile from './EditProfile';
 import DoctorProfile from './DoctorProfile';
 import Chating from './Chating';
-
 export {
   Splash,
   GetStarted,

@@ -2,10 +2,12 @@ import React from 'react';
 import {StyleSheet, Text, ScrollView, View} from 'react-native';
 import {Logo} from '../assets';
 import {colors, fonts, useForm} from '../utils';
-import {Button, Gap, Input} from '../components';
+import {Button, Gap, Input, Loading} from '../components';
 import auth from '@react-native-firebase/auth';
+import {showMessage} from 'react-native-flash-message';
 
 const SignIn = ({navigation}) => {
+  const [loading, setLoading] = React.useState(false);
   const [form, setForm] = useForm({
     email: '',
     password: '',
@@ -15,53 +17,68 @@ const SignIn = ({navigation}) => {
     auth()
       .signInWithEmailAndPassword(form.email, form.password)
       .then(() => {
+        setForm('reset');
+        setLoading(true);
         navigation.navigate('MainApp');
       })
       .catch(error => {
         if (error.code === 'auth/email-already-in-use') {
-          console.log('That email address is already in use!');
+          showMessage({
+            message: 'That email address is already in use!',
+            type: 'danger',
+          });
         }
-
         if (error.code === 'auth/invalid-email') {
-          console.log('That email address is invalid!');
+          showMessage({
+            message: 'That email address is invalid!',
+            type: 'danger',
+          });
         }
-
-        console.error(error);
+        if (error.code === 'auth/wrong-password') {
+          showMessage({
+            message:
+              'The password is invalid or the user does not have a password.',
+            type: 'danger',
+          });
+        }
       });
   };
   return (
-    <ScrollView style={styles.container}>
-      <View style={styles.containerWrapper}>
-        <Logo />
-        <Text style={styles.desc}>Masuk dan mulai berkonsultasi</Text>
-      </View>
-      <View style={styles.content}>
-        <View>
-          <Input
-            title="Email Address"
-            value={form.email}
-            onChangeText={value => setForm('email', value)}
-          />
-          <Gap height={24} />
-          <Input
-            title="Password"
-            value={form.password}
-            onChangeText={value => setForm('password', value)}
-            secureTextEntry
-          />
-          <Gap height={40} />
+    <>
+      <ScrollView style={styles.container}>
+        <View style={styles.containerWrapper}>
+          <Logo />
+          <Text style={styles.desc}>Masuk dan mulai berkonsultasi</Text>
         </View>
-        <View>
-          <Button title="Sign In" onPress={signInPressed} />
-          <Button
-            type="tertiary"
-            title="Create New Account"
-            onPress={() => navigation.replace('SignUp')}
-          />
-          <Button type="tertiary" title="Forgot My Password" />
+        <View style={styles.content}>
+          <View>
+            <Input
+              title="Email Address"
+              value={form.email}
+              onChangeText={value => setForm('email', value)}
+            />
+            <Gap height={24} />
+            <Input
+              title="Password"
+              value={form.password}
+              onChangeText={value => setForm('password', value)}
+              secureTextEntry
+            />
+            <Gap height={40} />
+          </View>
+          <View>
+            <Button title="Sign In" onPress={signInPressed} />
+            <Button
+              type="tertiary"
+              title="Create New Account"
+              onPress={() => navigation.replace('SignUp')}
+            />
+            <Button type="tertiary" title="Forgot My Password" />
+          </View>
         </View>
-      </View>
-    </ScrollView>
+      </ScrollView>
+      {loading && <Loading />}
+    </>
   );
 };
 

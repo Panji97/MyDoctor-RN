@@ -6,6 +6,7 @@ import News from './News';
 import HospitalItems from './HospitalItems';
 import DoctorProfilePart from './DoctorProfilePart';
 import Chat from './Chat';
+import Loading from './Loading';
 
 export {
   Photo,
@@ -16,4 +17,5 @@ export {
   HospitalItems,
   DoctorProfilePart,
   Chat,
+  Loading,
 };
