@@ -13,11 +13,20 @@ import {BtnAddPhoto, BtnRemovePhoto} from '../assets';
 const EditProfile = ({navigation}) => {
   const [hasPhoto, setHasPhoto] = useState(true);
   const [photo, setPhoto] = useState(null);
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [profession, setProfession] = useState('');
+
   useEffect(() => {
     getData('Users').then(res => {
+      // console.log(res);
       setPhoto({uri: res.image});
+      setName(res.fullname);
+      setEmail(res.email);
+      setProfession(res.profession);
     });
   }, []);
+
   return (
     <View style={styles.container}>
       <Header
@@ -32,13 +41,13 @@ const EditProfile = ({navigation}) => {
             {hasPhoto && <BtnRemovePhoto style={styles.icon} />}
           </TouchableOpacity>
         </View>
-        <Input title="Fullname" />
+        <Input title="Fullname" value={name} />
         <Gap height={24} />
-        <Input title="Profession" />
+        <Input title="Profession" value={profession} />
         <Gap height={24} />
-        <Input title="Emaill Address" />
+        <Input title="Emaill Address" value={email} />
         <Gap height={24} />
-        <Input title="Password" secureTextEntry />
+        <Input title="Password" value={'makan'} secureTextEntry />
         <Gap height={40} />
         <Button
           title="Save Profile"

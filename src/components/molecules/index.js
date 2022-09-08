@@ -7,6 +7,7 @@ import HospitalItems from './HospitalItems';
 import DoctorProfilePart from './DoctorProfilePart';
 import Chat from './Chat';
 import Loading from './Loading';
+import MainApp from './MainApp';
 
 export {
   Photo,
@@ -18,4 +19,5 @@ export {
   DoctorProfilePart,
   Chat,
   Loading,
+  MainApp,
 };

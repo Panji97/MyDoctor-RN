@@ -1,17 +1,20 @@
 import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {MyTabBar} from '../components';
+// import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import {
+  // MyTabBar,
+  MainApp,
+} from '../components';
 import {
   Splash,
   GetStarted,
   SignIn,
   SignUp,
   UploadPhoto,
-  Doctor,
-  Message,
-  Hospital,
+  // Doctor,
+  // Message,
+  // Hospital,
   ListDoctor,
   UserProfile,
   EditProfile,
@@ -20,19 +23,19 @@ import {
 } from '../pages';
 
 const Stack = createNativeStackNavigator();
-const Tab = createBottomTabNavigator();
+// const Tab = createBottomTabNavigator();
 
-const MainApp = () => {
-  return (
-    <Tab.Navigator
-      screenOptions={{headerShown: false}}
-      tabBar={props => <MyTabBar {...props} />}>
-      <Tab.Screen name="Doctor" component={Doctor} />
-      <Tab.Screen name="Message" component={Message} />
-      <Tab.Screen name="Hospital" component={Hospital} />
-    </Tab.Navigator>
-  );
-};
+// const MainApp = () => {
+//   return (
+//     <Tab.Navigator
+//       screenOptions={{headerShown: false}}
+//       tabBar={props => <MyTabBar {...props} />}>
+//       <Tab.Screen name="Doctor" component={Doctor} />
+//       <Tab.Screen name="Message" component={Message} />
+//       <Tab.Screen name="Hospital" component={Hospital} />
+//     </Tab.Navigator>
+//   );
+// };
 
 const Routes = () => {
   return (
